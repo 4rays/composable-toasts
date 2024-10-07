@@ -27,7 +27,7 @@ public struct ToastQueueViewModifier: ViewModifier {
         }
       }
         .animation(
-          .spring(response: 0.4, dampingFraction: 0.6),
+          .spring(response: 0.4, dampingFraction: 0.7),
           value: store.currentToast
         )
     )
@@ -42,4 +42,33 @@ extension View {
       ToastQueueViewModifier(store: store)
     )
   }
+}
+
+#Preview {
+  @Previewable @State var toggle = false
+  VStack {
+    Button("Toggle") {
+      toggle.toggle()
+    }
+    .buttonStyle(.borderedProminent)
+
+    ZStack {
+      if toggle {
+        RoundedRectangle(cornerRadius: 8)
+          .fill(Color.blue)
+          .frame(height: 100)
+          .transition(
+            AnyTransition.move(edge: .bottom)
+              .combined(with: .opacity)
+          )
+      }
+    }
+    .padding()
+    .frame(maxHeight: .infinity, alignment: .bottom)
+  }
+
+  .animation(
+    .spring(response: 0.4, dampingFraction: 0.7),
+    value: toggle
+  )
 }

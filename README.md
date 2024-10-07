@@ -40,10 +40,10 @@ To queue a toast, call the `addToQueue` action with a `ToastConfig`:
 let toast = ToastConfig(
   id: UUID(),
   title: "The Toastening",
-  kind: .info,
+  level: .info,
 )
 
-return .send(.toasts(.addToQueue(toastData)))
+return .send(.toastQueue(.addToQueue(toastData)))
 ```
 
 You can control other aspects of the toast queues, such as dismissing the
